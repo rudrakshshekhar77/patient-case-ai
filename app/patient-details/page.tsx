@@ -45,7 +45,7 @@ export default function PatientDetails() {
   className="min-h-[calc(100vh-73px)] flex items-center justify-center px-6 py-12"
   style={{
     backgroundImage:
-      "linear-gradient(rgba(248, 250, 252, 0.92), rgba(248, 250, 252, 0.96)), url('https://images.unsplash.com/photo-1631217868264-e5b90bb7e133?q=80&w=1600&auto=format&fit=crop')",
+      "linear-gradient(rgba(30, 41, 59, 0.55), rgba(30, 41, 59, 0.65)), url('https://images.unsplash.com/photo-1631217868264-e5b90bb7e133?q=80&w=1600&auto=format&fit=crop')",
     backgroundSize: 'cover',
     backgroundPosition: 'center',
   }}
