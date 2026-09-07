@@ -22,23 +22,54 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="max-w-md mx-auto mt-20 p-6 border rounded-lg">
-      <h1 className="text-2xl font-bold mb-4">{isSignUp ? 'Register' : 'Login'}</h1>
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <input type="email" placeholder="Email" value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          className="w-full border p-2 rounded" required />
-        <input type="password" placeholder="Password" value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          className="w-full border p-2 rounded" required />
-        {error && <p className="text-red-500 text-sm">{error}</p>}
-        <button type="submit" className="w-full bg-blue-600 text-white p-2 rounded">
-          {isSignUp ? 'Sign Up' : 'Log In'}
+    <div className="max-w-md mx-auto mt-16 px-6">
+      <div className="bg-white rounded-2xl shadow-sm border border-slate-200 p-8">
+        <h1 className="text-2xl font-bold text-slate-900 mb-1">
+          {isSignUp ? 'Create your account' : 'Welcome back'}
+        </h1>
+        <p className="text-slate-500 text-sm mb-6">
+          {isSignUp ? 'Sign up to start your case intake' : 'Log in to continue'}
+        </p>
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <div>
+            <label className="block text-sm font-medium text-slate-700 mb-1">Email</label>
+            <input
+              type="email"
+              placeholder="you@example.com"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="w-full border border-slate-300 p-2.5 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+              required
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-slate-700 mb-1">Password</label>
+            <input
+              type="password"
+              placeholder="••••••••"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="w-full border border-slate-300 p-2.5 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+              required
+            />
+          </div>
+          {error && (
+            <p className="text-red-600 text-sm bg-red-50 px-3 py-2 rounded-lg">{error}</p>
+          )}
+          <button
+            type="submit"
+            className="w-full bg-teal-600 hover:bg-teal-700 text-white p-2.5 rounded-lg font-medium transition-colors"
+          >
+            {isSignUp ? 'Sign Up' : 'Log In'}
+          </button>
+        </form>
+        <button
+          onClick={() => setIsSignUp(!isSignUp)}
+          className="text-sm text-teal-600 hover:text-teal-700 mt-4 block mx-auto"
+        >
+          {isSignUp ? 'Already have an account? Log in' : "New here? Register"}
         </button>
-      </form>
-      <button onClick={() => setIsSignUp(!isSignUp)} className="text-sm text-blue-600 mt-3">
-        {isSignUp ? 'Already have an account? Log in' : 'New here? Register'}
-      </button>
+      </div>
     </div>
   )
 }
