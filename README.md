@@ -11,6 +11,7 @@ for doctors to review, edit, and confirm.
 - Medical document upload with AI-powered text extraction
 - AI-generated clinical case summaries (Google Gemini)
 - Doctor dashboard to review, edit, and confirm cases
+- Row-Level Security for data protection
 
 ## Tech Stack
 - Next.js (React), TypeScript, Tailwind CSS
@@ -19,7 +20,7 @@ for doctors to review, edit, and confirm.
 - Vercel (Deployment)
 
 ## Live Demo
-[apna Vercel URL yahan daalo]
+[apna Vercel URL yahan paste karo]
 
 ## Local Setup
 1. Clone the repo
