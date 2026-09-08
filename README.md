@@ -20,7 +20,7 @@ for doctors to review, edit, and confirm.
 - Vercel (Deployment)
 
 ## Live Demo
-[apna Vercel URL yahan paste karo]
+https://patient-case-ai.vercel.app
 
 ## Local Setup
 1. Clone the repo
