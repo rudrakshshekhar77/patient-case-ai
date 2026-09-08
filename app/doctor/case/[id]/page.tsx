@@ -135,15 +135,14 @@ export default function CaseReview() {
 
   return (
     <div
-      className="min-h-[calc(100vh-73px)] py-10"
-      style={{
-        backgroundImage:
-          "linear-gradient(rgba(248, 250, 252, 0.95), rgba(248, 250, 252, 0.98)), url('https://images.unsplash.com/photo-1631507623289-8127b3d61e50?q=80&w=1600&auto=format&fit=crop')",
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundAttachment: 'fixed',
-      }}
-    >
+  className="min-h-[calc(100vh-73px)] py-10"
+  style={{
+    backgroundImage:
+      "linear-gradient(rgba(248, 250, 252, 0.90), rgba(248, 250, 252, 0.95)), url('https://images.unsplash.com/photo-1584982751601-97dcc096659c?q=80&w=1600&auto=format&fit=crop')",
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+  }}
+>
       <div className="max-w-3xl mx-auto px-6">
         <Link href="/doctor/dashboard" className="text-sm text-teal-700 hover:text-teal-800 font-medium mb-4 inline-flex items-center gap-1">
           ← Back to Dashboard
