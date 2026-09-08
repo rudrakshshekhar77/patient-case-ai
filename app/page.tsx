@@ -35,7 +35,7 @@ export default function Home() {
             Patient Login
           </Link>
           <Link
-            href="/doctor/dashboard"
+            href="/doctor/login"
             className="bg-white/10 backdrop-blur hover:bg-white/20 text-white px-8 py-3 rounded-lg font-medium border border-white/20 transition-colors"
           >
             Doctor Dashboard

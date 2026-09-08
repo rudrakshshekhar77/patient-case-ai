@@ -1,6 +1,7 @@
 'use client'
 import { useEffect, useState } from 'react'
 import { supabase } from '@/lib/supabase'
+import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 
 type CaseSummary = {
@@ -46,12 +47,24 @@ function timeAgo(dateStr: string) {
 }
 
 export default function DoctorDashboard() {
+  const router = useRouter()
   const [cases, setCases] = useState<CaseSummary[]>([])
   const [loading, setLoading] = useState(true)
   const [search, setSearch] = useState('')
   const [filter, setFilter] = useState<'all' | 'pending' | 'confirmed'>('all')
+  const [authChecked, setAuthChecked] = useState(false)
 
   useEffect(() => {
+    const isLoggedIn = localStorage.getItem('doctor_logged_in')
+    if (!isLoggedIn) {
+      router.push('/doctor/login')
+      return
+    }
+    setAuthChecked(true)
+  }, [router])
+
+  useEffect(() => {
+    if (!authChecked) return
     const fetchCases = async () => {
       const { data } = await supabase
         .from('case_summaries')
@@ -61,7 +74,20 @@ export default function DoctorDashboard() {
       setLoading(false)
     }
     fetchCases()
-  }, [])
+  }, [authChecked])
+
+  const handleLogout = () => {
+    localStorage.removeItem('doctor_logged_in')
+    router.push('/doctor/login')
+  }
+
+  if (!authChecked) {
+    return (
+      <div className="min-h-[calc(100vh-73px)] bg-slate-50 flex items-center justify-center">
+        <p className="text-slate-400">Checking access...</p>
+      </div>
+    )
+  }
 
   const pendingCount = cases.filter((c) => c.status === 'pending').length
   const confirmedCount = cases.filter((c) => c.status === 'confirmed').length
@@ -75,19 +101,25 @@ export default function DoctorDashboard() {
 
   return (
     <div className="min-h-[calc(100vh-73px)] bg-slate-50">
-      {/* Header banner */}
       <div className="bg-gradient-to-r from-teal-800 to-teal-700 text-white">
-        <div className="max-w-5xl mx-auto px-6 py-10">
-          <p className="text-teal-100 text-sm font-medium mb-1">Welcome back, Doctor</p>
-          <h1 className="text-3xl font-bold">Patient Case Dashboard</h1>
-          <p className="text-teal-100/80 text-sm mt-1">
-            Review AI-prepared case summaries before each consultation
-          </p>
+        <div className="max-w-5xl mx-auto px-6 py-10 flex items-start justify-between flex-wrap gap-4">
+          <div>
+            <p className="text-teal-100 text-sm font-medium mb-1">Welcome back, Dr. Sharma</p>
+            <h1 className="text-3xl font-bold">Patient Case Dashboard</h1>
+            <p className="text-teal-100/80 text-sm mt-1">
+              Review AI-prepared case summaries before each consultation
+            </p>
+          </div>
+          <button
+            onClick={handleLogout}
+            className="text-sm text-teal-50 hover:text-white bg-white/10 hover:bg-white/20 px-4 py-2 rounded-lg transition-colors"
+          >
+            Log Out
+          </button>
         </div>
       </div>
 
       <div className="max-w-5xl mx-auto px-6 -mt-6">
-        {/* Stats cards */}
         <div className="grid grid-cols-3 gap-4 mb-6">
           <div className="bg-white rounded-xl p-5 shadow-md border border-slate-100">
             <p className="text-sm text-slate-500 mb-1">Total Cases</p>
@@ -103,7 +135,6 @@ export default function DoctorDashboard() {
           </div>
         </div>
 
-        {/* Search + filter bar */}
         <div className="bg-white rounded-xl p-4 shadow-sm border border-slate-200 mb-6 flex flex-col sm:flex-row gap-3 sm:items-center sm:justify-between">
           <input
             type="text"
@@ -129,7 +160,6 @@ export default function DoctorDashboard() {
           </div>
         </div>
 
-        {/* Case list */}
         {loading && (
           <div className="text-center py-16 text-slate-400">Loading cases...</div>
         )}
